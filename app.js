@@ -10,7 +10,7 @@ const showmovies = () => {
     movies.forEach(({ name, image }) => {
         output += `
             <div class="card">
-                <img class="card-avatar" src="${image}"/> <!-- Corrected src attribute -->
+                <img class="card-avatar" src="${image}"/>
                 <h1 class="card-title">${name}</h1>
             </div>
         `;
@@ -19,3 +19,12 @@ const showmovies = () => {
 };
 
 document.addEventListener("DOMContentLoaded", showmovies);
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker
+            .register("/serviceWorker.js")
+            .then((res) => console.log("Service worker registered"))
+            .catch((err) => console.error("Service worker registration failed:", err));
+    });
+}
